@@ -44,6 +44,7 @@ class QASMetric():
             "y": 1,  # Pauli gate: bit and phase flip
             "z": 1,  # Pauli gate: phase flip
             "h": 1,  # Clifford gate: Hadamard
+            "sx": 1,  # SX: sqrt(X) 
             "s": 1,  # Clifford gate: sqrt(Z) phase gate
             "sdg": 1,  # Clifford gate: conjugate of sqrt(Z)
             "t": 1,  # C3 gate: sqrt(S) phase gate
@@ -88,7 +89,7 @@ class QASMetric():
 
         # Number of CX in Standard gates
         self.STANDARD_CX_TABLE = {"r": 0,"u3": 0, "u2": 0, "u1": 0, "cx": 1, "id": 0, "x": 0, "y": 0, "z": 0, "h": 0,
-                             "s": 0, "sdg": 0, "t": 0, "tdg": 0, "rx": 0, "ry": 0, "rz": 0, "c1": 0, "c2": 1}
+                             "s": 0, "sdg": 0, "sx": 0, "t": 0, "tdg": 0, "rx": 0, "ry": 0, "rz": 0, "c1": 0, "c2": 1}
         # Number of CX in Composition gates
         self.COMPOSITION_CX_TABLE = {"p":0,"cz": 1, "cy": 1, "swap": 3, "ch": 2, "ccx": 6, "cswap": 8, "crx": 2, "cry": 2,
                                 "crz": 2, "cu1": 2, "cu3": 2, "rxx": 2, "rzz": 2, "ryy":2, "rccx": 3, "rc3x": 6, "c3x": 6,
@@ -126,17 +127,17 @@ class QASMetric():
         self.calc_fdm()
         self.calc_size_factor()
         self.calc_entanglement_variance()
-        print('-'*10+'Baseline Metrics'+'-'*10)
-        print(f'Qubit Count: {self.qubit_count}')
-        print(f'Maximum Qubit Depth: {self.max_qubit_depth}')
-        print(f'Maximum Qubit Depth ID: {self.max_qubit_depth_id}')
-        print(f'Single Gate Count: {self.single_gate_count}')
-        print(f'Dual Gate Count: {self.dual_gate_count}')
-        print('-'*10+'Calculated Metrics'+'-'*10)
-        print(f"Operation Density: {self.operation_density:.3f}\n"
-              f"FDM: {self.fdm:.3f}\n"
-              f"Measurement Ratio: {self.measurement_ratio:.3f}\n"
-              f"Entanglement Variance : {self.entanglement_variance:.3f}\n")
+        #print('-'*10+'Baseline Metrics'+'-'*10)
+        #print(f'Qubit Count: {self.qubit_count}')
+        #print(f'Maximum Qubit Depth: {self.max_qubit_depth}')
+        #print(f'Maximum Qubit Depth ID: {self.max_qubit_depth_id}')
+        #print(f'Single Gate Count: {self.single_gate_count}')
+        #print(f'Dual Gate Count: {self.dual_gate_count}')
+        #print('-'*10+'Calculated Metrics'+'-'*10)
+        #print(f"Operation Density: {self.operation_density:.3f}\n"
+        #      f"FDM: {self.fdm:.3f}\n"
+        #      f"Measurement Ratio: {self.measurement_ratio:.3f}\n"
+        #      f"Entanglement Variance : {self.entanglement_variance:.3f}\n")
         return {'qubit_count':self.qubit_count,
                 # Circuit depth is defined in calculations below, therefore we need not a function, same as width
                 'circuit_depth':self.depth,
